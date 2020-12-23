@@ -13,10 +13,10 @@ game_window_width=800
 game_window_height=500
 game_window=pygame.display.set_mode((game_window_width,game_window_height))
 #adding title
-pygame.display.set_caption("game by satvik")
+pygame.display.set_caption("Game by-S@tvik")
 
 FPS=30 #frames per second
-clock=pygame.time.Clock()
+clock=pygame.time.Clock() # time k according frames ko change krna padta haii
 
 #for music
 pygame.mixer.init()
@@ -35,7 +35,10 @@ background=pygame.transform.scale(background,(game_window_width,game_window_heig
 #font
 font=pygame.font.SysFont("Helvetica",40)
 
-
+#for dispalying any message on window
+def message_to_screen(text,color,x,y):
+    message_screen=font.render(text,True,color)
+    game_window.blit(message_screen,[x,y])
 
 def snake_plot(game_window,color,snake_list,snake_size):
     for x,y in snake_list:
@@ -105,8 +108,8 @@ def GAME_LOOP():
                 if event.type==pygame.QUIT:
                     exit_game=True
                 
-                if event.type==pygame.KEYDOWN:
-                    if event.key==pygame.K_RETURN:
+                if event.type==pygame.KEYDOWN: # ye check krega key dabi ya nhi.
+                    if event.key==pygame.K_RETURN:# agar dabi h toh konsi dabi
                         bgimg=pygame.image.load("D:\\snake_game\\Game_Sprites\\Back.jpg")
                         bgimg=pygame.transform.scale(bgimg,(800,500)).convert_alpha()
                         
@@ -172,6 +175,7 @@ def GAME_LOOP():
             if len(snake_list)>snake_lenght:
                 del snake_list[0]
             
+            #when the snake collide in itself
             if snake_head in snake_list[:-1]:
                 game_over=True
                 pygame.mixer.music.load("D:\\snake_game\\Game_Sprites\\hit_sound.mp3")
